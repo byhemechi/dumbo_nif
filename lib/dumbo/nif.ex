@@ -1,7 +1,13 @@
 defmodule Dumbo.Nif do
   @moduledoc false
 
-  use Rustler, otp_app: :dumbo_nif, crate: "dumbo_nif"
+  version = Mix.Project.config()[:version]
+
+  use RustlerPrecompiled,
+    otp_app: :dumbo_nif,
+    crate: "dumbo_nif",
+    base_url: "https://github.com/byhemechi/dumbo_nif/releases/download/v#{version}",
+    version: version
 
   @doc """
   Decodes a numeric float token from the start of `source`.
